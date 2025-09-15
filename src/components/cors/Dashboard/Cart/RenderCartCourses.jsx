@@ -10,7 +10,7 @@ const RenderCartCourses = () => {
 
     const {cart} = useSelector(state => state.cart);
     const dispatch = useDispatch();
-    console.log("cart from crenderCartcourses:",cart);
+    //console.log("cart from crenderCartcourses:",cart);
     
   return (
     <div className="flex flex-1 flex-col">

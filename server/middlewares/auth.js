@@ -5,11 +5,11 @@ const User = require("../models/User");
 //auth
 exports.auth = async (req, res, next) =>{
     try{
-        console.log("token feching:");
+        //console.log("token feching:");
 
-        console.log("tokenC:",req.cookies?.token)
-        console.log("tokenB:",req.body?.token)
-        console.log("tokenH:",req.header)
+        // console.log("tokenC:",req.cookies?.token)
+        // console.log("tokenB:",req.body?.token)
+        // console.log("tokenH:",req.header)
 
         const token = req.cookies?.token
                     || req.body?.token 
@@ -27,7 +27,7 @@ exports.auth = async (req, res, next) =>{
         //verify the token
         try{
             const decode = jwt.verify(token, process.env.JWT_SECRET);
-            console.log("decode;",decode);
+            //console.log("decode;",decode); 
             req.user = decode;
         }
         catch(err){

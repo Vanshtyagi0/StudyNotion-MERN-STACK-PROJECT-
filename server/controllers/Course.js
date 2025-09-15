@@ -373,7 +373,7 @@ exports.getFullCourseDetails = async (req, res) => {
     const { courseId } = req.body
     const userId = req.user.id
 
-    console.log("userId:",userId,"\ncouseId:",courseId);
+    //console.log("userId:",userId,"\ncouseId:",courseId);
 
     const courseDetails = await Course.findOne({ _id: courseId })
       .populate({
@@ -398,7 +398,7 @@ exports.getFullCourseDetails = async (req, res) => {
       userId: userId,
     });
 
-    console.log("courseProgressCount : ", courseProgressCount)
+    //console.log("courseProgressCount : ", courseProgressCount)
 
     if (!courseDetails) {
       return res.status(400).json({

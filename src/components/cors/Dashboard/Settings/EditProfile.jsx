@@ -169,12 +169,12 @@ export default function EditProfile() {
                 id="about"
                 placeholder="Enter Bio Details"
                 className="form-style"
-                {...register("about", { required: true })}
+                {...register("about",)}
                 defaultValue={user?.additionalDetails?.about}
               />
               {errors.about && (
                 <span className="-mt-1 text-[12px] text-yellow-100">
-                  Please enter your About.
+                  {errors.message}
                 </span>
               )}
             </div>

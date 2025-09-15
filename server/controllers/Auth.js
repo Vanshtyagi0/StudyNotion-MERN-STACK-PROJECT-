@@ -34,7 +34,6 @@ exports.sendotp = async (req, res) =>{
             lowerCaseAlphabets: false,
             specialChars: false
         });
-        console.log("OTP generated:", otp);
 
         //check unique otp or not
         let result = await OTP.findOne({otp: otp});
@@ -45,7 +44,6 @@ exports.sendotp = async (req, res) =>{
             lowerCaseAlphabets: false,
             specialChars: false
             });
-            console.log("OTP generated:", otp);
 
             result = await OTP.findOne({otp: otp});
         }
@@ -59,7 +57,6 @@ exports.sendotp = async (req, res) =>{
         return res.status(200).json({
             success: true,
             message: "OTP sent successfully",
-            otp
         });
     }
     catch(err){
@@ -121,7 +118,7 @@ exports.signup = async (req, res) =>{
         }
 
         const recentOtp = await OTP.find({email}).sort({createdAt: -1}).limit(1);
-        console.log("recentotp:",recentOtp);
+        //console.log("recentotp:",recentOtp);
 
         if(recentOtp.length === 0){
             //otp not find

@@ -57,7 +57,7 @@ exports.showAllCategories = async (req, res) =>{
 exports.categoryPageDetails = async (req, res) => {
     try {
         const { CategoryId } = req.body;
-        console.log("CategoryId from server:", CategoryId);
+        //console.log("CategoryId from server:", CategoryId);
 
         // Validate CategoryId
         if (!CategoryId || !mongoose.Types.ObjectId.isValid(CategoryId)) {

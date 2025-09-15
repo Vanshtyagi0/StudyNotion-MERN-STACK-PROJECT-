@@ -46,9 +46,9 @@ const VideoDetails = () => {
         setVideoEnded(false)
       }
     })()
-    console.log("courseSectionData",courseSectionData);
-    console.log("courseEntireData",courseEntireData);
-    console.log("completedLectures",completedLectures);
+    // console.log("courseSectionData",courseSectionData);
+    // console.log("courseEntireData",courseEntireData);
+    // console.log("completedLectures",completedLectures);
 
   }, [courseSectionData, courseEntireData, location.pathname])
 
@@ -198,8 +198,8 @@ const VideoDetails = () => {
           />
 
           {/* Render When Video Ends */}
-          {console.log("video ended:",videoEnded)}
-
+          
+          {/* {console.log("video ended:",videoEnded)} */}
           {videoEnded && (
             <div
               style={{

@@ -42,8 +42,9 @@ export default function CourseInformationForm() {
       }
       setLoading(false)
     }
+    
+    //console.log("course on first render",course);
     // if form is in edit mode
-    console.log("course on first render",course);
     if (editCourse) {
       // console.log("data populated", editCourse)
       setValue("courseTitle", course.courseName)
