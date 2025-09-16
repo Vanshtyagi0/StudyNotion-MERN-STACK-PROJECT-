@@ -58,7 +58,7 @@ export default function CourseBuilderForm() {
       )
     }
     
-    console.log("result after creatind and updating section..", result)
+    //console.log("result after creatind and updating section..", result)
     if (result) {
       dispatch(setCourse(result))
       setEditSectionName(null)

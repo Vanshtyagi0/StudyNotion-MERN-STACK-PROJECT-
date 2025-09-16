@@ -10,7 +10,6 @@ const { default: mongoose } = require("mongoose");
 
 exports.createCourse = async (req, res) =>{
     try{
-
       // get USer id from request Object
       const userId = req.user.id;
 
@@ -26,7 +25,7 @@ exports.createCourse = async (req, res) =>{
         instructions: _instructions,
       } = req.body;
 
-      console.log("course data for creation:",req.body);
+      //console.log("course data for creation:",req.body);
       // Get thumbnail image from request files
       const thumbmail = req.files.thumbnailImage;
 
@@ -34,9 +33,9 @@ exports.createCourse = async (req, res) =>{
       const tag = JSON.parse(_tag);
       const instructions = JSON.parse(_instructions);
 
-      console.log("tag:",tag);
-      console.log("Instructions:",instructions);
-      console.log(courseDescription,":",courseName,":",whatYouWillLearn,":",price,":",thumbmail,":",category)
+      // console.log("tag:",tag);
+      // console.log("Instructions:",instructions);
+      // console.log(courseDescription,":",courseName,":",whatYouWillLearn,":",price,":",thumbmail,":",category)
 
       // Check if any of the required fields are missing
       if(!courseDescription ||
@@ -99,7 +98,7 @@ exports.createCourse = async (req, res) =>{
           status: status,
           instructions,
       });
-      console.log("Newcourse:",newCourse);
+      //console.log("Newcourse:",newCourse);
 
       // Add the new course to the User schema of the instructor
       await User.findByIdAndUpdate(

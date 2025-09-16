@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react'
 import { useForm } from 'react-hook-form';
 import {apiConnector} from "../../services/apiconnector";
 import {contactusEndpoint} from "../../services/api";
-
+import {toast} from "react-hot-toast"
 
 import CountryCode from "../../data/countrycode.json"
 
@@ -28,17 +28,20 @@ const ContactUsForm = () => {
     },[reset, isSubmitSuccessful]);
 
     const submitContactForm = async(data) =>{
-        console.log("Logging Data:",data);
+        //console.log("Logging Data:",data);
+        const toastId = toast.loading("loading...");
         try{
             setLoading(true);
             const response = await apiConnector("POST", contactusEndpoint.CONTACT_US_API, data);
-            console.log("Logged response:",response);
+            //console.log("Logged response:",response);
             setLoading(false);
+            toast.success("Information sent Successfully...");
         }
         catch(err){
             console.log("Error: ",err.message);
             setLoading(false);
         }
+        toast.dismiss(toastId);
     }
   return (
     <form onSubmit={handleSubmit(submitContactForm)}
@@ -60,7 +63,7 @@ const ContactUsForm = () => {
                     {
                         errors.firstname && (
                             <span className="-mt-1 text-[12px] text-yellow-100">
-                                Please enter your name
+                                Please enter your first name
                             </span>
                         )
                     }
@@ -77,8 +80,15 @@ const ContactUsForm = () => {
                     id='lastname'
                     placeholder='Enter first name'
                     className="form-style"
-                    {...register("lastname")}
+                    {...register("lastname",{required: true})}
                     />
+                    {
+                        errors.lastname && (
+                            <span className="-mt-1 text-[12px] text-yellow-100">
+                                Please enter your last name
+                            </span>
+                        )
+                    }
             </div>
         </div>
 
