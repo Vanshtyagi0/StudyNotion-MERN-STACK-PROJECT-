@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { RxCross2 } from "react-icons/rx"
 import { useSelector } from "react-redux"
-import { toast } from "react-hot-toast" // Assuming a toast library for notifications
 
 import { createRating } from "../../../services/operations/courseDetailsAPI"
 import IconBtn from "../../common/IconBtn"
@@ -110,7 +109,7 @@ export default function CourseReviewModal({ setReviewModal }) {
           <div className="flex items-center justify-center gap-x-4">
             <img
               src={user?.image} 
-              alt={`${user?.firstName || "User"} profile picture`}
+              alt={user?.firstName}
               className="aspect-square w-[50px] rounded-full object-cover"
             />
             <div>

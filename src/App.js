@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Home } from "./Pages/Home";
 import "./App.css";
 import Signup from './Pages/Signup';
@@ -17,7 +17,7 @@ import Contact from "./Pages/Contact";
 import Settings from "./components/cors/Dashboard/Settings"
 import EnrolledCourses from "./components/cors/Dashboard/EnrolledCourses";
 import Cart from "./components/cors/Dashboard/Cart";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { ACCOUNT_TYPE } from "./utils/Constants";
 import AddCourse from "./components/cors/Dashboard/AddCourses";
 import MyCourses from "./components/cors/Dashboard/MyCourses";
@@ -29,9 +29,6 @@ import ViewCourse from "./Pages/ViewCourse";
 import VideoDetails from "./components/cors/ViewCourse/VideoDetails";
 
 function App() {
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   
   const { user } = useSelector((state) => state.profile)
 

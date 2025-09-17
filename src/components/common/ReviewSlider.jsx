@@ -8,7 +8,7 @@ import "swiper/css/pagination"
 import "swiper/css/navigation"
 
 // Icons
-import { Autoplay, Pagination, Navigation } from "swiper/modules"
+import { Autoplay, Pagination } from "swiper/modules"
 
 // API
 import { apiConnector } from "../../services/apiconnector"

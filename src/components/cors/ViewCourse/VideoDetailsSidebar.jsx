@@ -104,7 +104,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
               </div>
 
               {/* Sub Sections */}
-              {activeStatus === section ?._id && (
+              {activeStatus === section?._id && (
                 <div className="transition-[height] duration-500 ease-in-out">
                   {section.subSection.map((topic, i) => (
                     <div

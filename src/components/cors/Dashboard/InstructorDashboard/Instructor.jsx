@@ -28,7 +28,7 @@ export default function Instructor() {
         }
         setLoading(false)
       })()
-    }, [])
+    }, [token])
 
     // useEffect(()=>{
     //   console.log("instructorData",instructorData);

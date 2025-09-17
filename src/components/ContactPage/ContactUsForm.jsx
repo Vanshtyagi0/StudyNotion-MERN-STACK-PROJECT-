@@ -34,6 +34,9 @@ const ContactUsForm = () => {
             setLoading(true);
             const response = await apiConnector("POST", contactusEndpoint.CONTACT_US_API, data);
             //console.log("Logged response:",response);
+            if(!response.data.success){
+                toast.error("Please try again, information not sent!");
+            }
             setLoading(false);
             toast.success("Information sent Successfully...");
         }

@@ -50,7 +50,7 @@ const VideoDetails = () => {
     // console.log("courseEntireData",courseEntireData);
     // console.log("completedLectures",completedLectures);
 
-  }, [courseSectionData, courseEntireData, location.pathname])
+  }, [courseSectionData, courseEntireData, location.pathname, courseId,sectionId, subSectionId, navigate])
 
   // check if the lecture is the first video of the course
   const isFirstVideo = () => {
