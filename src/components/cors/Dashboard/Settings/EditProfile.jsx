@@ -20,72 +20,104 @@ export default function EditProfile() {
   } = useForm()
 
   const submitProfileForm = async (data) => {
-    // console.log("Form Data - ", data)
     try {
       dispatch(updateProfile(token, data))
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message)
     }
   }
+
   return (
-    <>
-      <form onSubmit={handleSubmit(submitProfileForm)}>
-        {/* Profile Information */}
-        <div className="my-10 flex flex-col gap-y-6 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
-          <h2 className="text-lg font-semibold text-richblack-5">
+    <form onSubmit={handleSubmit(submitProfileForm)} className="space-y-6">
+      {/* Profile Information Card */}
+      <div className="rounded-2xl border-2 border-richblack-700 bg-richblack-800 overflow-hidden transition-all hover:border-richblack-600 hover:shadow-lg">
+        {/* Header */}
+        <div className="px-6 md:px-8 py-4 bg-richblack-900/50 border-b border-richblack-700">
+          <h2 className="text-lg md:text-xl font-bold text-richblack-5">
             Profile Information
           </h2>
-          <div className="flex flex-col gap-5 lg:flex-row">
-            <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="firstName" className="lable-style">
+          <p className="text-xs md:text-sm text-richblack-400 mt-1">
+            Update your personal details
+          </p>
+        </div>
+
+        {/* Form Content */}
+        <div className="p-6 md:p-8 space-y-6">
+          {/* Name Fields Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* First Name */}
+            <div className="space-y-2">
+              <label 
+                htmlFor="firstName" 
+                className="text-sm font-medium text-richblack-300 flex items-center gap-1"
+              >
                 First Name
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 name="firstName"
                 id="firstName"
                 placeholder="Enter first name"
-                className="form-style"
+                className="w-full px-4 py-3 rounded-xl bg-richblack-700 border-2 border-richblack-600 text-richblack-5 placeholder-richblack-400 focus:outline-none focus:border-yellow-50 focus:ring-2 focus:ring-yellow-50/20 transition-all"
                 {...register("firstName", { required: true })}
                 defaultValue={user?.firstName}
               />
               {errors.firstName && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
-                  Please enter your first name.
+                <span className="text-xs text-red-400 flex items-center gap-1">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                  Please enter your first name
                 </span>
               )}
             </div>
-            <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="lastName" className="lable-style">
+
+            {/* Last Name */}
+            <div className="space-y-2">
+              <label 
+                htmlFor="lastName" 
+                className="text-sm font-medium text-richblack-300 flex items-center gap-1"
+              >
                 Last Name
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
                 name="lastName"
                 id="lastName"
-                placeholder="Enter first name"
-                className="form-style"
+                placeholder="Enter last name"
+                className="w-full px-4 py-3 rounded-xl bg-richblack-700 border-2 border-richblack-600 text-richblack-5 placeholder-richblack-400 focus:outline-none focus:border-yellow-50 focus:ring-2 focus:ring-yellow-50/20 transition-all"
                 {...register("lastName", { required: true })}
                 defaultValue={user?.lastName}
               />
               {errors.lastName && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
-                  Please enter your last name.
+                <span className="text-xs text-red-400 flex items-center gap-1">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                  Please enter your last name
                 </span>
               )}
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 lg:flex-row">
-            <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="dateOfBirth" className="lable-style">
+          {/* DOB and Gender Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Date of Birth */}
+            <div className="space-y-2">
+              <label 
+                htmlFor="dateOfBirth" 
+                className="text-sm font-medium text-richblack-300 flex items-center gap-1"
+              >
                 Date of Birth
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="date"
                 name="dateOfBirth"
                 id="dateOfBirth"
-                className="form-style"
+                className="w-full px-4 py-3 rounded-xl bg-richblack-700 border-2 border-richblack-600 text-richblack-5 focus:outline-none focus:border-yellow-50 focus:ring-2 focus:ring-yellow-50/20 transition-all"
                 {...register("dateOfBirth", {
                   required: {
                     value: true,
@@ -99,50 +131,67 @@ export default function EditProfile() {
                 defaultValue={user?.additionalDetails?.dateOfBirth}
               />
               {errors.dateOfBirth && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="text-xs text-red-400 flex items-center gap-1">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
                   {errors.dateOfBirth.message}
                 </span>
               )}
             </div>
-            <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="gender" className="lable-style">
+
+            {/* Gender */}
+            <div className="space-y-2">
+              <label 
+                htmlFor="gender" 
+                className="text-sm font-medium text-richblack-300 flex items-center gap-1"
+              >
                 Gender
+                <span className="text-red-500">*</span>
               </label>
               <select
-                type="text"
                 name="gender"
                 id="gender"
-                className="form-style"
+                className="w-full px-4 py-3 rounded-xl bg-richblack-700 border-2 border-richblack-600 text-richblack-5 focus:outline-none focus:border-yellow-50 focus:ring-2 focus:ring-yellow-50/20 transition-all cursor-pointer"
                 {...register("gender", { required: true })}
                 defaultValue={user?.additionalDetails?.gender}
               >
                 {genders.map((ele, i) => {
                   return (
-                    <option key={i} value={ele}>
+                    <option key={i} value={ele} className="bg-richblack-700">
                       {ele}
                     </option>
                   )
                 })}
               </select>
               {errors.gender && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
-                  Please enter your Date of Birth.
+                <span className="text-xs text-red-400 flex items-center gap-1">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                  Please select your gender
                 </span>
               )}
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 lg:flex-row">
-            <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="contactNumber" className="lable-style">
+          {/* Contact and About Row */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {/* Contact Number */}
+            <div className="space-y-2">
+              <label 
+                htmlFor="contactNumber" 
+                className="text-sm font-medium text-richblack-300 flex items-center gap-1"
+              >
                 Contact Number
+                <span className="text-red-500">*</span>
               </label>
               <input
                 type="tel"
                 name="contactNumber"
                 id="contactNumber"
-                placeholder="Enter Contact Number"
-                className="form-style"
+                placeholder="Enter contact number"
+                className="w-full px-4 py-3 rounded-xl bg-richblack-700 border-2 border-richblack-600 text-richblack-5 placeholder-richblack-400 focus:outline-none focus:border-yellow-50 focus:ring-2 focus:ring-yellow-50/20 transition-all"
                 {...register("contactNumber", {
                   required: {
                     value: true,
@@ -154,45 +203,48 @@ export default function EditProfile() {
                 defaultValue={user?.additionalDetails?.contactNumber}
               />
               {errors.contactNumber && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
+                <span className="text-xs text-red-400 flex items-center gap-1">
+                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
                   {errors.contactNumber.message}
                 </span>
               )}
             </div>
-            <div className="flex flex-col gap-2 lg:w-[48%]">
-              <label htmlFor="about" className="lable-style">
+
+            {/* About */}
+            <div className="space-y-2">
+              <label 
+                htmlFor="about" 
+                className="text-sm font-medium text-richblack-300"
+              >
                 About
               </label>
               <input
                 type="text"
                 name="about"
                 id="about"
-                placeholder="Enter Bio Details"
-                className="form-style"
-                {...register("about",)}
+                placeholder="Enter bio details"
+                className="w-full px-4 py-3 rounded-xl bg-richblack-700 border-2 border-richblack-600 text-richblack-5 placeholder-richblack-400 focus:outline-none focus:border-yellow-50 focus:ring-2 focus:ring-yellow-50/20 transition-all"
+                {...register("about")}
                 defaultValue={user?.additionalDetails?.about}
               />
-              {errors.about && (
-                <span className="-mt-1 text-[12px] text-yellow-100">
-                  {errors.message}
-                </span>
-              )}
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="flex justify-end gap-2">
-          <button
-            onClick={() => {
-              navigate("/dashboard/my-profile")
-            }}
-            className="cursor-pointer rounded-md bg-richblack-700 py-2 px-5 font-semibold text-richblack-50"
-          >
-            Cancel
-          </button>
-          <IconBtn type="submit" text="Save" />
-        </div>
-      </form>
-    </>
+      {/* Action Buttons */}
+      <div className="flex flex-col-reverse sm:flex-row justify-end gap-3">
+        <button
+          type="button"
+          onClick={() => navigate("/dashboard/my-profile")}
+          className="px-6 py-3 rounded-xl bg-richblack-700 hover:bg-richblack-600 font-semibold text-richblack-50 transition-all border-2 border-transparent hover:border-richblack-500"
+        >
+          Cancel
+        </button>
+        <IconBtn type="submit" text="Save Changes" />
+      </div>
+    </form>
   )
 }
