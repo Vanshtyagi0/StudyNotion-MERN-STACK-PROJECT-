@@ -83,5 +83,5 @@ exports.courseEnrollmentEmail = (courseName, name) => {
         </div>
     </body>
     
-    </html>`;
+    </html>`
   };

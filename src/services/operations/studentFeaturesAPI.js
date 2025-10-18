@@ -45,11 +45,13 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
         if(!orderResponse.data.success) {
             throw new Error(orderResponse.data.message);
         }
+
         console.log("PRINTING orderResponse", orderResponse);
-         
+
+        
         //options
         const options = {
-            key: process.env.RAZORPAY_KEY,
+            key: process.env.REACT_APP_RAZORPAY_KEY,
             currency: orderResponse.data.message.currency,
             amount: `${orderResponse.data.message.amount}`,
             order_id:orderResponse.data.message.id,
@@ -60,11 +62,11 @@ export async function buyCourse(token, courses, userDetails, navigate, dispatch)
                 name:`${userDetails.firstName}`,
                 email:userDetails.email
             },
-            handler: function(response) {
+            handler: async function(response) {
                 //send successful wala mail
-                sendPaymentSuccessEmail(response, orderResponse.data.message.amount,token );
+                await sendPaymentSuccessEmail(response, orderResponse.data.message.amount,token );
                 //verifyPayment
-                verifyPayment({...response, courses}, token, navigate, dispatch);
+                await verifyPayment({...response, courses}, token, navigate, dispatch);
             }
         }
         //miss hogya tha 
@@ -106,7 +108,7 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
         const response  = await apiConnector("POST", COURSE_VERIFY_API, bodyData, {
             Authorization:`Bearer ${token}`,
         })
-
+        
         if(!response.data.success) {
             throw new Error(response.data.message);
         }

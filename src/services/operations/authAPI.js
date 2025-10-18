@@ -3,6 +3,7 @@ import { apiConnector } from "../apiconnector";
 import {endpoints} from "../api";
 import {toast} from "react-hot-toast";
 import { setUser } from "../../reducer/slices/profileSlice";
+import {resetCart} from "../../reducer/slices/cartSlice";
 
 const {
   SENDOTP_API,
@@ -124,7 +125,7 @@ export function logout(navigate) {
   return (dispatch) => {
     dispatch(setToken(null))
     dispatch(setUser(null))
-    //dispatch(resetCart())
+    dispatch(resetCart())
     localStorage.removeItem("token")
     localStorage.removeItem("user")
     toast.success("Logged Out")

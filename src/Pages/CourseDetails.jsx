@@ -4,6 +4,7 @@ import { HiOutlineGlobeAlt } from "react-icons/hi"
 // import { MarkdownAsync } from "react-markdown"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useParams } from "react-router-dom"
+import toast from "react-hot-toast"
 
 import ConfirmationModal from "../components/common/ConfirmationModal"
 import Footer from "../components/common/Footer"
@@ -15,6 +16,9 @@ import { fetchCourseDetails } from "../services/operations/courseDetailsAPI"
 import { buyCourse } from "../services/operations/studentFeaturesAPI"
 import GetAvgRating from "../utils/avgRating"
 import Error from "./Error"
+
+import { addToCart } from "../reducer/slices/cartSlice"
+import { ACCOUNT_TYPE } from "../utils/Constants"
 
 function CourseDetails() {
   const { user } = useSelector((state) => state.profile)
@@ -115,6 +119,26 @@ function CourseDetails() {
       btn2Handler: () => setConfirmationModal(null),
     })
   }
+
+  const handleAddToCart = () => {
+    if (user && user?.accountType === ACCOUNT_TYPE.INSTRUCTOR) {
+      toast.error("You are an Instructor. You can't buy a course.")
+      return
+    }
+    if (token) {
+      dispatch(addToCart(response?.data?.courseDetails))
+      return
+    }
+    setConfirmationModal({
+      text1: "You are not logged in!",
+      text2: "Please login to add To Cart",
+      btn1Text: "Login",
+      btn2Text: "Cancel",
+      btn1Handler: () => navigate("/login"),
+      btn2Handler: () => setConfirmationModal(null),
+    })
+  }
+
  
   if (paymentLoading) {
     // console.log("payment loading")
@@ -175,10 +199,21 @@ function CourseDetails() {
               <p className="space-x-3 pb-4 text-3xl font-semibold text-richblack-5">
                 Rs. {price}
               </p>
-              <button className="yellowButton" onClick={handleBuyCourse}>
-                Buy Now
+              <button className="yellowButton"
+              onClick={
+                user && response?.data?.courseDetails?.studentEnrolled.includes(user?._id)
+                  ? () => navigate("/dashboard/enrolled-courses")
+                  : handleBuyCourse
+              }>
+                {user && response?.data?.courseDetails?.studentEnrolled.includes(user?._id)
+                ? "Go To Course"
+                : "Buy Now"}
               </button>
-              <button className="blackButton">Add to Cart</button>
+              {(!user || !response?.data?.courseDetails?.studentEnrolled.includes(user?._id)) && (
+              <button onClick={handleAddToCart} className="blackButton">
+                Add to Cart
+              </button>
+            )}
             </div>
           </div>
 
@@ -188,6 +223,7 @@ function CourseDetails() {
               course={response?.data?.courseDetails}
               setConfirmationModal={setConfirmationModal}
               handleBuyCourse={handleBuyCourse}
+              handleAddToCart={handleAddToCart}
             />
           </div>
         </div>
