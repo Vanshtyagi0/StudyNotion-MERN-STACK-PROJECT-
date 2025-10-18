@@ -1,20 +1,15 @@
-import React from "react"
 import copy from "copy-to-clipboard"
 import { toast } from "react-hot-toast"
 import { BsFillCaretRightFill } from "react-icons/bs"
 import { FaShareSquare } from "react-icons/fa"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { addToCart } from "../../../reducer/slices/cartSlice"
-import { ACCOUNT_TYPE } from "../../../utils/Constants"
 
 
-function CourseDetailsCard({ course, setConfirmationModal, handleBuyCourse, handleAddToCart}) {
+function CourseDetailsCard({ course, handleBuyCourse, handleAddToCart}) {
   const { user } = useSelector((state) => state.profile)
-  const { token } = useSelector((state) => state.auth)
   const navigate = useNavigate()
-  const dispatch = useDispatch()
 
   const {
     thumbnail: ThumbnailImage,
