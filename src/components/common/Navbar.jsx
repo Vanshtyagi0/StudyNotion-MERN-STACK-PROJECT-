@@ -13,6 +13,7 @@ import { categories } from '../../services/api';
 import {ACCOUNT_TYPE} from "../../utils/Constants";
 import logo from "../../assets/Logo/Logo-Full-Light.png"
 import {NavbarLinks} from "../../data/navbar-links";
+import HomeSidebar from "../cors/HomePage/HomeSidebar"
 
 const Navbar = () => {
 
@@ -23,6 +24,7 @@ const Navbar = () => {
 
   const [subLinks, setSubLinks] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
 
   const fetchSublinks = async() =>{
@@ -158,11 +160,13 @@ const Navbar = () => {
             token !== null && <ProfileDropDown />
           }
           
-          <button className="mr-4 md:hidden">  
+          <button className="mr-4 md:hidden" onClick={() => setIsOpen(true)}>  
             <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
           </button>
         </div>
       </div>
+      
+      <HomeSidebar isOpen={isOpen} onClose={() => setIsOpen(false)} subLinks={subLinks} loading={loading}/>
     </div>
   )
 }
